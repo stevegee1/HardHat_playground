@@ -6,7 +6,7 @@ import {ethers, run, network} from "hardhat"
 
 
 //call main function
-async function main():Promise<void>{
+async function main(){
    let SimpleStorageFactory:any
    let SimpleStorage:any
     SimpleStorageFactory= await ethers.getContractFactory("SimpleStorage")
