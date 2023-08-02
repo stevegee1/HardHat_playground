@@ -5,7 +5,7 @@ import "@nomicfoundation/hardhat-verify"
 import "./tasks/blocknumber"
 import "hardhat-gas-reporter"
 import "solidity-coverage"
-//import "@typechain/hardhat"
+import "@typechain/hardhat"
 
 
 

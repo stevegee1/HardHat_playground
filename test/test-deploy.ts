@@ -26,5 +26,18 @@ describe("SimpleStorage", (): void => {
             const updatedValue= await SimpleStorageDeploye.retrieve()
              assert.equal(updatedValue.toString(), "7")
         })
-        it
+        it("the argument passed must be equal to equal to the state variable value", async()=>{
+            const txn= await SimpleStorageDeploye.addPerson("boy", 1)
+            await txn.wait(1)
+            const expectedValue= SimpleStorageDeploye.nameToFavoriteNumber("boy")
+            assert.equal((await expectedValue).toString(),"1")
+
+        })
+        it("It should return the passed argument as the index 0 of the array People ", async()=>{
+            const txn= await SimpleStorageDeploye.addPerson("girl",2)
+            await txn.wait(1)
+            const PeopleStruct= await SimpleStorageDeploye.people(0)
+            assert.include(PeopleStruct,  BigInt(2))
+            
+        })
 })
