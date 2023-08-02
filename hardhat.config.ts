@@ -3,6 +3,9 @@ import "@nomicfoundation/hardhat-toolbox";
 import "dotenv/config"
 import "@nomicfoundation/hardhat-verify"
 import "./tasks/blocknumber"
+import "hardhat-gas-reporter"
+import "solidity-coverage"
+//import "@typechain/hardhat"
 
 
 
@@ -31,6 +34,12 @@ const config: HardhatUserConfig = {
     etherscan: {
         apiKey: `${ETHERSCAN_API_KEY}`,
     },
+    gasReporter:{
+      enabled:true,
+       currency:"USD",
+       outputFile:"./file.txt",
+       noColors:true
+    }
 }
 
 

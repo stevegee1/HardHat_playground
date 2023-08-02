@@ -2,35 +2,40 @@
 
 
 import {ethers, run, network} from "hardhat"
+//import {SimpleStorage, SimpleStorage__factory} from "../typechain-types"
+
 
 //call main function
 async function main():Promise<void>{
-   const SimpleStorageFactory= await ethers.getContractFactory("SimpleStorage")
+   let SimpleStorageFactory:any
+   let SimpleStorage:any
+    SimpleStorageFactory= await ethers.getContractFactory("SimpleStorage")
 
    console.log("Deploying contracts...")
-   const SimpleStorage= await SimpleStorageFactory.deploy()
-   console.log(`${SimpleStorage.target}`)
+    SimpleStorage= await SimpleStorageFactory.deploy()
+   console.log(`${SimpleStorage}`)
 
    console.log("#####################")
   
   if(network.config.chainId === 1155111 && process.env.ETHERSCAN_API_KEY ){
-    await SimpleStorage.deploymentTransaction()?.wait(6)
-    await verify(`${SimpleStorage.target}`)
-  }
+    await SimpleStorage.deploymentTransaction()?.wait(10)
+   await verify(`${SimpleStorage.target}`)
+   }
    
 /**
  * Interacting with the contract methods
  */
 
-  //calling retrieve function
-  const currentValue= await SimpleStorage.retrieve()
-  console.log(`Current value: ${currentValue}`)
+//   //calling retrieve function
+let currentValue= await SimpleStorage.retrieve()
+console.log(currentValue)
+console.log(`Current value: ${currentValue.toString()}`)
 
   //calling store function
-  const storeValueTxn= await SimpleStorage.store(7)
-  await storeValueTxn.wait(1)
-  const storeValue= await SimpleStorage.retrieve()
-  console.log(`Updated value: ${storeValue}`)
+ const storeValueTxn= await SimpleStorage.store(7)
+ await storeValueTxn.wait(1)
+ const storeValue= await SimpleStorage.retrieve()
+ console.log(`Updated value: ${storeValue}`)
 
 
 }
